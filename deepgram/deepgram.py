@@ -71,8 +71,8 @@ class Deepgram(object):
         Uploads a remote audio file to the API.
 
         Params:
-            media_url (string): The URL of the remote audio file
-            tags (list) -- optional: Tags to describe the audio file
+            media_url (string):           The URL of the remote audio file
+            tags      (list) -- optional: Tags to describe the audio file
         """
 
         data = {
@@ -105,17 +105,18 @@ class Deepgram(object):
         of it that contain any matches to the search term.
 
         Params:
-            obj (string): The content ID fo the object
-            query (string): The query term
-            kwargs (dict): Extra arguments to pass to the function. Include:
-                - Nmax (int): The maximum number of matches to return.
-                              Default: 10
-                - Pmin (float): The minimum probability that qualifies a match.
-                                Default: 0.55
-                - snippet (bool): Whether to return the transcript of a match.
-                                  Default: True
-                - sort (string): The term to sort by. Default: 'time'
+            obj    (string): The content ID fo the object
+            query  (string): The query term
+            kwargs (dict):   Extra arguments to pass to the function. Include:
+                - Nmax    (int):    The maximum number of matches to return.
+                                    Default: 10
+                - Pmin    (float):  The minimum probability that qualifies a
+                                    match. Default: 0.55
+                - snippet (bool):   Whether to return the transcript of a
+                                    match. Default: True
+                - sort    (string): The term to sort by. Default: 'time'
         """
+
         data = {
             "action": "object_search",
             "userID": self.api_key,

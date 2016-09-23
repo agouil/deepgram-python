@@ -27,7 +27,7 @@ class Http(object):
 
         Params:
             response (Response): The request response object
-            format (string): The format of the response. Defaults to JSON
+            format   (string):   The format of the response. Defaults to JSON
         """
 
         if response.status_code != requests.codes.ok:
@@ -49,10 +49,10 @@ class Http(object):
 
         Params:
             endpoint (string): The remote endpoint
-            headers (dict): Custom request headers
-            params (dict): A dictionary of any URL parameters to pass
-                           to the GET request
-            format (string): The response format
+            headers  (dict):   Custom request headers
+            params   (dict):   A dictionary of any URL parameters to pass to
+                               the GET request
+            format   (string): The response format
         """
         request_endpoint = self._get_request_url(endpoint)
         self.logger.debug({
@@ -67,10 +67,10 @@ class Http(object):
 
         Params:
             endpoint (string): The remote endpoint
-            headers (dict): Custom request headers
-            params (dict): A dictionary of parameters to pass
-                           to the POST request
-            format (string): The response format
+            headers  (dict):   Custom request headers
+            params   (dict):   A dictionary of parameters to pass to the POST
+                               request
+            format   (string): The response format
         """
 
         request_endpoint = self._get_request_url(endpoint)
