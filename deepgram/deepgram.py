@@ -66,11 +66,38 @@ class Deepgram(object):
         }
         return self._make_request(data)
 
-    def media_upload(self, media, tags=None):
-        pass
+    def upload(self, media_url, tags=None):
+        """
+        Uploads a remote audio file to the API.
 
-    def media_upload_list(self, media_list):
-        pass
+        Params:
+            media_url (string): The URL of the remote audio file
+            tags (list) -- optional: Tags to describe the audio file
+        """
+
+        data = {
+            "action": "index_content",
+            "userID": self.api_key,
+            "data_url": media_url
+        }
+        if tags and len(tags) > 0:
+            data['tags'] = tags
+        return self._make_request(data)
+
+    def upload_list(self, media_list):
+        """
+        Uploads a list of remote audio files to the API.
+
+        Params:
+            media_list (list): A list of remote audio file URLs
+        """
+
+        data = {
+            "action": "index_content_list",
+            "userID": self.api_key,
+            "data_url": media_list
+        }
+        return self._make_request(data)
 
     def query(self, query):
         pass
