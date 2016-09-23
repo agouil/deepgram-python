@@ -88,4 +88,16 @@ class Deepgram(object):
         pass
 
     def transcript(self, obj):
-        pass
+        """
+        Returns the transcript of a specific audio object.
+
+        Params:
+            obj (string): The content ID of the object
+        """
+
+        data = {
+            "action": "get_object_transcript",
+            "userID": self.api_key,
+            "contentID": obj
+        }
+        return self._make_request(data)
