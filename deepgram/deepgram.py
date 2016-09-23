@@ -108,11 +108,38 @@ class Deepgram(object):
     def parallel_search(self, query):
         pass
 
-    def tag(self, obj):
-        pass
+    def tag(self, obj, tag):
+        """
+        Tags an audio object in the server with the specified tag.
+
+        Params:
+            obj (string): The content ID of the object
+            tag (string): The tag of the object
+        """
+
+        data = {
+            "action": "tag_object",
+            "userID": self.api_key,
+            "contentID": obj,
+            "tag": tag
+        }
+        return self._make_request(data)
 
     def get_tags(self, obj):
-        pass
+        """
+        Returns the tags that are associated with a specific audio object
+        on the server.
+
+        Params:
+            obj (string): The content ID of the object
+        """
+
+        data = {
+            "action": "get_object_tags",
+            "userID": self.api_key,
+            "contentID": obj
+        }
+        return self._make_request(data)
 
     def transcript(self, obj):
         """
