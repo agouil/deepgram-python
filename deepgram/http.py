@@ -39,17 +39,17 @@ class Http(object):
                 content = response.json()
             else:
                 content = response.text
-        except ValueError as e:
-            self.logger.error(e)
+        except ValueError:
             raise
         return content
 
-    def get(self, endpoint='', params=None, format='json'):
+    def get(self, endpoint='', headers={}, params=None, format='json'):
         """
         Executes a GET request to the remote server.
 
         Params:
             endpoint (string): The remote endpoint
+            headers (dict): Custom request headers
             params (dict): A dictionary of any URL parameters to pass
                            to the GET request
             format (string): The response format
@@ -57,15 +57,17 @@ class Http(object):
         request_endpoint = self._get_request_url(endpoint)
         self.logger.debug({
             'endpoint': request_endpoint, 'method': 'GET', 'params': params})
-        response = requests.get(request_endpoint, params=params)
+        response = requests.get(
+            request_endpoint, headers=headers, params=params)
         return self._parse_response(response, format)
 
-    def post(self, endpoint='', params=None, format='json'):
+    def post(self, endpoint='', headers={}, params=None, format='json'):
         """
         Executes a POST request to the remote server.
 
         Params:
             endpoint (string): The remote endpoint
+            headers (dict): Custom request headers
             params (dict): A dictionary of parameters to pass
                            to the POST request
             format (string): The response format
@@ -74,5 +76,6 @@ class Http(object):
         request_endpoint = self._get_request_url(endpoint)
         self.logger.debug({
             'endpoint': request_endpoint, 'method': 'POST', 'params': params})
-        response = requests.post(request_endpoint, data=params)
+        response = requests.post(
+            request_endpoint, headers=headers, json=params)
         return self._parse_response(response, format)
