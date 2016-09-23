@@ -15,6 +15,7 @@ class Deepgram(object):
         self.api_key = api_key
         self.logger = logger()
         self.client = Http('http://api.deepgram.com')
+        self.group_client = Http('http://groupsearch.api.deepgram.com')
 
     def _get_headers(self):
         """
@@ -131,8 +132,30 @@ class Deepgram(object):
         }
         return self._make_request(data)
 
-    def group_search(self, query):
-        pass
+    def group_search(self, query, tag):
+        """
+        Searches in all the uploaded audio objects with a given 'tag' and
+        'term' and returns the contentIDs of any matches.
+
+        Params:
+            query (string): The query term
+            tag   (string): The tag to use for the search. Narrows down the
+                            objects to be searched.
+        """
+
+        data = {
+            "action": "group_search",
+            "userID": self.api_key,
+            "tag": tag,
+            "query": query
+        }
+        try:
+            response = self.group_client.post(
+                headers=self._get_headers(), params=data)
+        except Exception as e:
+            self.logger.error(e)
+            raise
+        return response
 
     def parallel_search(self, query):
         pass
