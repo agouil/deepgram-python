@@ -132,15 +132,15 @@ class Deepgram(object):
         }
         return self._make_request(data)
 
-    def group_search(self, query, tag):
+    def group_search(self, query, tag=""):
         """
         Searches in all the uploaded audio objects with a given 'tag' and
         'term' and returns the contentIDs of any matches.
 
         Params:
-            query (string): The query term
-            tag   (string): The tag to use for the search. Narrows down the
-                            objects to be searched.
+            query (string):             The query term
+            tag   (string) -- optional: The tag to use for the search. Narrows
+                                        down the objects to be searched.
         """
 
         data = {
