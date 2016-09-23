@@ -17,10 +17,10 @@ class Http(object):
         self.root_domain = root_domain
         self.logger = logger()
 
-    def get_request_url(self, endpoint):
+    def _get_request_url(self, endpoint):
         return urljoin(self.root_domain, endpoint)
 
-    def parse_response(self, response, format='json'):
+    def _parse_response(self, response, format='json'):
         """
         Parses the response from the remote server. Formats the response
         based on the 'format' parameter - default format is JSON.
@@ -54,11 +54,11 @@ class Http(object):
                            to the GET request
             format (string): The response format
         """
-        request_endpoint = self.get_request_url(endpoint)
+        request_endpoint = self._get_request_url(endpoint)
         self.logger.debug({
             'endpoint': request_endpoint, 'method': 'GET', 'params': params})
         response = requests.get(request_endpoint, params=params)
-        return self.parse_response(response, format)
+        return self._parse_response(response, format)
 
     def post(self, endpoint='', params=None, format='json'):
         """
@@ -71,8 +71,8 @@ class Http(object):
             format (string): The response format
         """
 
-        request_endpoint = self.get_request_url(endpoint)
+        request_endpoint = self._get_request_url(endpoint)
         self.logger.debug({
             'endpoint': request_endpoint, 'method': 'POST', 'params': params})
         response = requests.post(request_endpoint, data=params)
-        return self.parse_response(response, format)
+        return self._parse_response(response, format)
