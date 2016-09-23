@@ -24,6 +24,22 @@ class Deepgram(object):
             'Content-Type': 'application/json'
         }
 
+    def _make_request(self, data):
+        """
+        Helper function to perform requests to the API.
+
+        Params:
+            data (dict): Data parameters passed to the API request
+        """
+
+        try:
+            response = self.client.post(
+                headers=self._get_headers(), params=data)
+        except Exception as e:
+            self.logger.error(e)
+            raise
+        return response
+
     def check_balance(self):
         """
         Returns the available balance for the user.
@@ -33,13 +49,7 @@ class Deepgram(object):
             "action": "get_balance",
             "userID": self.api_key
         }
-        try:
-            response = self.client.post(
-                headers=self._get_headers(), params=data)
-        except Exception as e:
-            self.logger.error(e)
-            raise
-        return response
+        return self._make_request(data)
 
     def check_status(self, obj):
         """
@@ -54,13 +64,7 @@ class Deepgram(object):
             "userID": self.api_key,
             "contentID": obj
         }
-        try:
-            response = self.client.post(
-                headers=self._get_headers(), params=data)
-        except Exception as e:
-            self.logger.error(e)
-            raise
-        return response
+        return self._make_request(data)
 
     def media_upload(self, media, tags=None):
         pass
