@@ -1,11 +1,12 @@
 import requests
 
 from log import logger
+from urlparse import urljoin
 
 
 class Http(object):
 
-    def __init__(self, endpoint):
+    def __init__(self, root_domain):
         """
         Class constructor.
 
@@ -13,8 +14,11 @@ class Http(object):
             endpoint (string): The endpoint to make requests to
         """
 
-        self.endpoint = endpoint
+        self.root_domain = root_domain
         self.logger = logger()
+
+    def get_request_url(self, endpoint):
+        return urljoin(self.root_domain, endpoint)
 
     def parse_response(self, response, format='json'):
         """
@@ -40,32 +44,35 @@ class Http(object):
             raise
         return content
 
-    def get(self, params=None, format='json'):
+    def get(self, endpoint='', params=None, format='json'):
         """
         Executes a GET request to the remote server.
 
         Params:
+            endpoint (string): The remote endpoint
             params (dict): A dictionary of any URL parameters to pass
                            to the GET request
             format (string): The response format
         """
-
+        request_endpoint = self.get_request_url(endpoint)
         self.logger.debug({
-            'endpoint': self.endpoint, 'method': 'GET', 'params': params})
-        response = requests.get(self.endpoint, params=params)
+            'endpoint': request_endpoint, 'method': 'GET', 'params': params})
+        response = requests.get(request_endpoint, params=params)
         return self.parse_response(response, format)
 
-    def post(self, params=None, format='json'):
+    def post(self, endpoint='', params=None, format='json'):
         """
         Executes a POST request to the remote server.
 
         Params:
+            endpoint (string): The remote endpoint
             params (dict): A dictionary of parameters to pass
                            to the POST request
             format (string): The response format
         """
 
+        request_endpoint = self.get_request_url(endpoint)
         self.logger.debug({
-            'endpoint': self.endpoint, 'method': 'POST', 'params': params})
-        response = requests.post(self.endpoint, data=params)
+            'endpoint': request_endpoint, 'method': 'POST', 'params': params})
+        response = requests.post(request_endpoint, data=params)
         return self.parse_response(response, format)
