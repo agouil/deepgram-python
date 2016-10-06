@@ -7,12 +7,7 @@ The wrapper is currently written for Python 2.7.xx
 ## Installation
 Install this package with `pip`:
 ```
-pip install git+https://github.com/agouil/deepgram-python
-```
-
-Or you can clone / download the repository and run:
-```
-python setup.py install
+pip install deepgram
 ```
 
 ## Usage
@@ -254,4 +249,4 @@ Run tests with `nosetests` command.
 To submit any issues, raise an issue through the [Issues Page](https://github.com/agouil/deepgram-python/issues)
 
 ## License
-[MIT](LICENSE)
+[MIT](LICENSE.txt)
