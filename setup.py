@@ -10,4 +10,5 @@ setup(name='deepgram',
       author_email='andreas.williams12@gmail.com',
       url='https://github.com/agouil/deepgram-python',
       packages=['deepgram'],
+      keywords=['deepgram', 'audio', 'voice', 'transcription', 'api'],
       install_requires=required)
