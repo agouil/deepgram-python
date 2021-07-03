@@ -1,3 +1,6 @@
+:warning: **This project is incompatible with the latest Deepgram API. Use the official SDK instead.**
+----
+
 # deepgram-python
 A Python wrapper for the Deepgrap API https://www.deepgram.com/.
 
